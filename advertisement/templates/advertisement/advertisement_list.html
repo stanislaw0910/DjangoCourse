@@ -1,0 +1,13 @@
+<html>
+    {% if advertisement_list %}
+        <ul>
+        {% for advertisement in advertisement_list %}
+            <li>
+                <a href="/advertisements/{{advertisement.id}}">{{ advertisement.title}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Объявлений нет</p>
+    {% endif %}
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{advertisement.title}}</title>
+</head>
+<body>
+<h1>{{ advertisement.title}}</h1><br>Цена:{{ advertisement.price}}
+<p>Описание:{{ advertisement.description}}</p>
+<br>
+{{advertisement.type}}:{{advertisement.rubric}}
+<p>Контактная информация:
+<br>Имя: {% if advertisement.author %}
+            {{advertisement.author}}
+         {% endif %}
+<br>Email: {{advertisement.author.email}}
+<br>Телефон: {{advertisement.author.phone_number}}</p>
+{{ advertisement.views_count }}
+</body>
+</html>

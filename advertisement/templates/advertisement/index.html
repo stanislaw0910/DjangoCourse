@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+    <select name="region" id="regions">
+        {% for region in regions %}
+            <option value={{region}}>{{ region}}</option>
+        {% endfor %}
+    </select>
+    <select name="category" id="categories">
+        {% for category in categories %}
+            <option value={{category}}>{{category}}</option>
+        {% endfor %}
+    </select>
+    <form>
+    <p><input type="search" name="q" placeholder="Поиск по сайту">
+        <input type="submit" value="Найти"></p>
+    </form>
+</body>
+</html>
