@@ -1,2 +1,4 @@
 # DjangoSkillboxCourse
-# DjangoCourse
+
+
+Django course from SkillBox
