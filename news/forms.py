@@ -1,7 +1,6 @@
 from django import forms
 from .models import Comments, News
-from django.forms import ModelForm, TextInput
-from django.conf import settings
+from django.forms import TextInput
 
 
 class NewsForm(forms.ModelForm):
@@ -33,15 +32,3 @@ class CommentForm(forms.ModelForm):
 
                 'placeholder': 'Comment'
             }), }
-
-"""
-class NewsForm(forms.Form):
-    title = forms.CharField()
-    description = forms.CharField()
-
-
-        
-class CommentForm(forms.Form):
-    username = forms.CharField()
-    text = forms.CharField()
-    news = forms.HiddenInput() """

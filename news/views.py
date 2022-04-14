@@ -55,12 +55,3 @@ class NewsUpdateView(UpdateView):
     model = News
     form_class = NewsForm
     template_name = 'news/update_news.html'
-
-'''
-            if request.user.is_authenticated():
-                Comments.objects.create(news_id=pk, username=request.user.username,
-                                        text=comment_form.cleaned_data['text'])
-            else:
-                Comments.objects.create(news_id=pk, **comment_form.cleaned_data)
-                Comments.objects.
-'''

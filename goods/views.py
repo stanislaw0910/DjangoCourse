@@ -2,11 +2,12 @@ import datetime
 from _csv import reader
 from decimal import Decimal
 
-from django.core.files import File
+
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.views.generic import DetailView
+
 from .forms import UploadPriceForm
 from .models import Item
 
@@ -52,5 +53,7 @@ def upload_prices(request):
         context = {'form': form}
         return render(request, 'goods/upload.html', context=context)
 
-'''количество обновленных товаров,
- количество необновленных товаров, артикулы товаров, которых не было в базе данных.'''
+class ItemDetail(DetailView):
+    model = Item
+    template_name = 'goods/items_detail.html'
+    context_object_name = 'item'

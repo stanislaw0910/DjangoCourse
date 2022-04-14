@@ -1,8 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import AuthForm, RegisterForm
+from .forms import AuthForm, RegisterForm, RestorePasswordForm
 from datetime import datetime
 from django.contrib.auth import logout
 from .models import Profile
@@ -16,7 +18,6 @@ def login_view(request):
             password = auth_form.cleaned_data['password']
             user = authenticate(username=username, password=password)
             current_time = int(datetime.now().strftime("%H"))
-            print(user)
             if user:
                 if current_time>22 or current_time<7:
                     return HttpResponse("You can't login between 22 and 7 hours")
@@ -66,3 +67,27 @@ def register(request):
 
 def account(request):
     return render(request, 'users/account.html')
+
+
+def restore_password(request):
+    if request.method== 'POST':
+        form = RestorePasswordForm(request.POST)
+        if form.is_valid():
+            user_email = form.cleaned_data['email']
+            new_password = User.objects.make_random_password()
+            current_user = User.objects.filter(email=user_email).first()
+            if current_user:
+                current_user.set_password(new_password)
+                current_user.save()
+            send_mail(
+                subject='Restore password',
+                message='Test',
+                from_email='admin@company.com',
+                recipient_list=['any@company.com']
+            )
+            return HttpResponse('Email with new password was sent successfully')
+    restore_password_form = RestorePasswordForm()
+    context = {
+        'form': restore_password_form
+    }
+    return render(request, 'users/restore_password.html', context=context)
